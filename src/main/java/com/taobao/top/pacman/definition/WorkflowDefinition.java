@@ -21,6 +21,8 @@ import com.taobao.top.pacman.ActivityInstance.ActivityInstanceState;
 import com.taobao.top.pacman.RuntimeArgument.ArgumentDirection;
 
 public class WorkflowDefinition extends ActivityDefinition {
+	public final static String EXCEPTION = "exception";
+
 	protected Map<String, Object> inArguments;
 	protected Map<String, Object> outArguments;
 	protected Map<String, Argument> arguments;
@@ -106,7 +108,7 @@ public class WorkflowDefinition extends ActivityDefinition {
 				}
 
 				metadata.bindAndAddArgument(this.exception = new OutArgument(),
-						new RuntimeArgument("exception", Exception.class, ArgumentDirection.Out));
+						new RuntimeArgument(EXCEPTION, Exception.class, ArgumentDirection.Out));
 
 				metadata.addChild(body);
 			}

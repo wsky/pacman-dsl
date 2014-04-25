@@ -19,7 +19,7 @@ public class ConverterTest {
 						"	return temp + 'Test';" +
 						"}" +
 						"" +
-						"Layout." +
+						"Workflow." +
 						"	In('arg')." +
 						"	In('isThen')." +
 						"	In('isWhile')." +

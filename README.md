@@ -29,7 +29,7 @@ End();
 If you implement a new activity and definition, you can easily add it to DSL.
 
 ```js
-Layout.
+Workflow.
 	In('arg').
 	Out('result').
 	Sequence().

@@ -28,7 +28,7 @@ public class Converter {
 	private final static String SOURCE_NAME = "DSL";
 
 	private ScriptableObject publicScope;
-	private String root = "Layout";
+	private String root = "Workflow";
 
 	public Converter() {
 		try {
