@@ -48,7 +48,7 @@ assertEquals("hello", outputs.get("result"));
 // or
 Activity workflow = new DefaultLayoutInvoker().convert(wf);
 Map<String, Object> outputs = new WorkflowInvoker().invoke(workflow, inputs);
-assertEquals('hello', outputs.get("result"));
+assertEquals("hello", outputs.get("result"));
 ```
 
 ## DSL Extension
