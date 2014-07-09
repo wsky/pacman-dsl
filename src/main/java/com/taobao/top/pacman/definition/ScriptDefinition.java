@@ -78,7 +78,7 @@ public class ScriptDefinition extends ActivityDefinition {
 		}
 		
 		if (this.result != null)
-			script.Result = this.result.toArgument(this.getParent(), validator);
+			script.setResult(this.result.toArgument(this.getParent(), validator));
 		
 		return script;
 	}

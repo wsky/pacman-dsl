@@ -20,7 +20,7 @@ public class ScriptTest extends StatementTestBase {
 		script.Source = new InArgument();
 		script.getVariables().add(new Variable("var1", "hi"));
 		script.getVariables().add(new Variable("var2", 123));
-		script.Result = new OutArgument();
+		script.setResult(new OutArgument());
 		return script;
 	}
 	

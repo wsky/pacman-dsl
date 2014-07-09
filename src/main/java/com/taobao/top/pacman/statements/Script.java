@@ -8,20 +8,18 @@ import java.util.Map;
 import com.taobao.top.pacman.ActivityContext;
 import com.taobao.top.pacman.ActivityMetadata;
 import com.taobao.top.pacman.Asserter;
+import com.taobao.top.pacman.CodeActivityContext;
+import com.taobao.top.pacman.CodeActivityWithResult;
 import com.taobao.top.pacman.InArgument;
-import com.taobao.top.pacman.NativeActivity;
-import com.taobao.top.pacman.NativeActivityContext;
-import com.taobao.top.pacman.OutArgument;
 import com.taobao.top.pacman.RuntimeArgument;
 import com.taobao.top.pacman.Variable;
 import com.taobao.top.pacman.RuntimeArgument.ArgumentDirection;
 import com.taobao.top.pacman.extensions.ScriptInvoker;
 
-public class Script extends NativeActivity {
+public class Script extends CodeActivityWithResult {
 	private List<Variable> variables;
 	
 	public InArgument Source;
-	public OutArgument Result;
 	
 	public List<Variable> getVariables() {
 		if (this.variables == null)
@@ -36,19 +34,13 @@ public class Script extends NativeActivity {
 		if (this.variables != null)
 			for (Variable variable : this.getVariables())
 				metadata.addRuntimeVariable(variable);
-		
-		if (this.Result != null)
-			metadata.bindAndAddArgument(this.Result, new RuntimeArgument("Result", Object.class, ArgumentDirection.Out));
 	}
 	
 	@Override
-	protected void execute(NativeActivityContext context) {
-		Object result = Asserter.
+	protected Object execute(CodeActivityContext context) {
+		return Asserter.
 				getOrThrowIfExtensionMissing(context, ScriptInvoker.class).
 				invoke((String) this.Source.get(context), this.getArguments(context));
-		
-		if (this.Result != null)
-			this.Result.set(context, result);
 	}
 	
 	private Map<String, Object> getArguments(ActivityContext context) {
