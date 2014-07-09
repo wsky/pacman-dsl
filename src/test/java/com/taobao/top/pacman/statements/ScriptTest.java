@@ -8,9 +8,9 @@ import java.util.Map;
 import com.taobao.top.pacman.Activity;
 import com.taobao.top.pacman.InArgument;
 import com.taobao.top.pacman.OutArgument;
-import com.taobao.top.pacman.ScriptInvoker;
 import com.taobao.top.pacman.Variable;
 import com.taobao.top.pacman.WorkflowExtensionManager;
+import com.taobao.top.pacman.extensions.ScriptInvoker;
 import com.taobao.top.pacman.testsuite.StatementTestBase;
 
 public class ScriptTest extends StatementTestBase {

@@ -1,4 +1,4 @@
-package com.taobao.top.pacman;
+package com.taobao.top.pacman.extensions;
 
 import java.util.Map;
 

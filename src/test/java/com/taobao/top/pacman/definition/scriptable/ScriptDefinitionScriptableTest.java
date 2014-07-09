@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.taobao.top.pacman.ScriptInvoker;
 import com.taobao.top.pacman.WorkflowExtensionManager;
+import com.taobao.top.pacman.extensions.ScriptInvoker;
 import com.taobao.top.pacman.testsuite.DefinitionScriptableTestBase;
 
 public class ScriptDefinitionScriptableTest extends DefinitionScriptableTestBase {

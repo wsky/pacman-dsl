@@ -13,9 +13,9 @@ import com.taobao.top.pacman.NativeActivity;
 import com.taobao.top.pacman.NativeActivityContext;
 import com.taobao.top.pacman.OutArgument;
 import com.taobao.top.pacman.RuntimeArgument;
-import com.taobao.top.pacman.ScriptInvoker;
 import com.taobao.top.pacman.Variable;
 import com.taobao.top.pacman.RuntimeArgument.ArgumentDirection;
+import com.taobao.top.pacman.extensions.ScriptInvoker;
 
 public class Script extends NativeActivity {
 	private List<Variable> variables;
