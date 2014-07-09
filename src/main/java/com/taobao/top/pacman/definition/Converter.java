@@ -81,10 +81,15 @@ public class Converter {
 			ctx.evaluateString(scope,
 					String.format("Object.prototype.%s = function(a1, a2, a3, a4) { " +
 							"	var act = %s.create(a1, a2, a3, a4); " +
-							"	this.addActivity(act); " +
-							"	return new %s(act, this, '%s'); " +
+							"	if(this.addActivity != undefined) {" +
+							"		this.addActivity(act); " +
+							"		return new %s(act, this, '%s');" +
+							"	} else" +
+							"		return new %s(act, null, '%s');" +
 							"}",
 							extension.getName(),
+							extension.getName(),
+							extension.getAdapterName(),
 							extension.getName(),
 							extension.getAdapterName(),
 							extension.getName()),

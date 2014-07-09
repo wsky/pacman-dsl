@@ -3,11 +3,12 @@ package com.taobao.top.pacman.definition;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.taobao.top.pacman.ActivityWithResult;
 import com.taobao.top.pacman.Variable;
 import com.taobao.top.pacman.VariableValue;
 import com.taobao.top.pacman.statements.Script;
 
-public class ScriptDefinition extends ActivityDefinition {
+public class ScriptDefinition extends ActivityWithResultDefinition {
 	private InArgumentDefinition source;
 	private List<VariableReferenceDefinition> variables;
 	private OutArgumentDefinition result;
@@ -51,14 +52,14 @@ public class ScriptDefinition extends ActivityDefinition {
 	}
 	
 	@Override
-	protected com.taobao.top.pacman.Activity internalToActivity(DefinitionValidator validator) {
+	public ActivityWithResult internalToActivityWithResult(ActivityDefinition parent, DefinitionValidator validator) {
 		if (this.source == null)
 			validator.addError("Source not set");
 		if (validator.hasError())
 			return null;
 		
 		Script script = new Script();
-		script.Source = this.source.toArgument(this.getParent(), validator);
+		script.Source = this.source.toArgument(parent, validator);
 		
 		// variable refer to parent's
 		if (this.variables != null)
@@ -66,7 +67,7 @@ public class ScriptDefinition extends ActivityDefinition {
 				script.getVariables().add(
 						new Variable(v.getName(),
 								new VariableValue(
-										v.toVariable(this.getParent(), validator))));
+										v.toVariable(parent, validator))));
 		
 		// variables of itself
 		if (super.variables != null) {
@@ -78,7 +79,7 @@ public class ScriptDefinition extends ActivityDefinition {
 		}
 		
 		if (this.result != null)
-			script.setResult(this.result.toArgument(this.getParent(), validator));
+			script.setResult(this.result.toArgument(parent, validator));
 		
 		return script;
 	}

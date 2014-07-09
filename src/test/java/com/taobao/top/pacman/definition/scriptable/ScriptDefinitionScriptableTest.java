@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Test;
+
 import com.taobao.top.pacman.WorkflowExtensionManager;
 import com.taobao.top.pacman.extensions.JavaScriptInvoker;
 import com.taobao.top.pacman.extensions.ScriptInvoker;
@@ -40,5 +42,16 @@ public class ScriptDefinitionScriptableTest extends DefinitionScriptableTestBase
 		WorkflowExtensionManager extensionManager = new WorkflowExtensionManager();
 		extensionManager.addExtension(ScriptInvoker.class, new JavaScriptInvoker());
 		return extensionManager;
+	}
+	
+	@Test
+	public void pass_to_argument_test() throws Exception {
+		this.assertOutputs(this.invoke("function func(){ return arg; }"
+				+ "Workflow."
+				+ "In('arg')."
+				+ "Out('result')."
+				+ "Assign()."
+				+ "Value(Scripting().Source(func).Put(Var('arg')))."
+				+ "To(Var('result'))", this.createInputs()));
 	}
 }
