@@ -6,8 +6,20 @@ import com.taobao.top.pacman.Function;
 import com.taobao.top.pacman.InlinedFunctionValue;
 
 public abstract class InlinedFunctionDefinition extends ActivityWithResultDefinition {
+	public InlinedFunctionDefinition() {
+		this("InlinedFunctionValue");
+	}
+	
+	public InlinedFunctionDefinition(String displayName) {
+		super(displayName);
+	}
+	
+	public InlinedFunctionDefinition(String displayName, ActivityDefinition parent) {
+		super(displayName, parent);
+	}
+	
 	@Override
-	public ActivityWithResult toActivity(ActivityDefinition parent, DefinitionValidator validator) {
+	public ActivityWithResult internalToActivityWithResult(ActivityDefinition parent, DefinitionValidator validator) {
 		return new InlinedFunctionValue(this.getFunction(parent, validator));
 	}
 	

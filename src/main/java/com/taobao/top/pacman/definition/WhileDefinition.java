@@ -16,11 +16,11 @@ public class WhileDefinition extends ActivityDefinition {
 	}
 	
 	public WhileDefinition Condition(VariableReferenceDefinition variable) {
-		return this.Condition(new VariableValueDefinition(variable));
+		return this.Condition(new VariableValueDefinition().Variable(variable));
 	}
 	
 	public WhileDefinition Condition(InlinedFunctionDefinition function) {
-		return this.Condition((ActivityWithResultDefinition)function);
+		return this.Condition((ActivityWithResultDefinition) function);
 	}
 	
 	public WhileDefinition Condition(ActivityWithResultDefinition condition) {
@@ -43,7 +43,7 @@ public class WhileDefinition extends ActivityDefinition {
 		
 		While _while = new While();
 		_while.setDisplayName(this.getDisplayName());
-		_while.Condition = this.condition.toActivity(this.getParent(), validator);
+		_while.Condition = this.condition.internalToActivityWithResult(this.getParent(), validator);
 		if (this.body != null)
 			_while.Body = this.body.toActivity(validator);
 		return _while;

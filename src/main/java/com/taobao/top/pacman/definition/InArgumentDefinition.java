@@ -27,7 +27,7 @@ public class InArgumentDefinition {
 			return new InArgument(this.variable.toVariable(parent, validator));
 		
 		if (this.activityWithResult != null)
-			return new InArgument(this.activityWithResult.toActivity(parent, validator));
+			return new InArgument(this.activityWithResult.internalToActivityWithResult(parent, validator));
 		
 		return new InArgument(this.constValue);
 	}
