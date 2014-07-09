@@ -7,7 +7,7 @@ import com.taobao.top.pacman.definition.scriptable.DefinitionExtension;
 
 public class ScriptDefinitionExtension implements DefinitionExtension {
 	public String getName() {
-		return "Script";
+		return "Scripting";
 	}
 	
 	public String getAdapterName() {

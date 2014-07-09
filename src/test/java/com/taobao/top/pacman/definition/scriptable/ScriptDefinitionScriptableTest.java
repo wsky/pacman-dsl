@@ -17,7 +17,7 @@ public class ScriptDefinitionScriptableTest extends DefinitionScriptableTestBase
 				+ "Workflow."
 				+ "In('arg')."
 				+ "Out('result')."
-				+ "Script()."
+				+ "Scripting()."
 				+ "    Source(func)."
 				+ "    Put(Var('arg'))."
 				+ "    Result(Var('result'))";
