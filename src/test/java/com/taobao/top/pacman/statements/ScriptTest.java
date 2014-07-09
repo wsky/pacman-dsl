@@ -1,5 +1,7 @@
 package com.taobao.top.pacman.statements;
 
+import static org.junit.Assert.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +11,7 @@ import com.taobao.top.pacman.OutArgument;
 import com.taobao.top.pacman.ScriptInvoker;
 import com.taobao.top.pacman.Variable;
 import com.taobao.top.pacman.WorkflowExtensionManager;
+import com.taobao.top.pacman.testsuite.StatementTestBase;
 
 public class ScriptTest extends StatementTestBase {
 	@Override
@@ -38,5 +41,10 @@ public class ScriptTest extends StatementTestBase {
 			}
 		});
 		return extensionManager;
+	}
+	
+	@Override
+	protected void assertOutputs(Map<String, Object> outputs) {
+		assertEquals("hi123", outputs.get("Result"));
 	}
 }
