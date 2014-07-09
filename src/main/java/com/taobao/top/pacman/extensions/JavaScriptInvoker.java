@@ -28,7 +28,7 @@ public class JavaScriptInvoker implements ScriptInvoker {
 					ScriptableObject.putProperty(scope, arg.getKey(), arg.getValue());
 			
 			Object result = ctx.evaluateString(scope,
-					// NOTE if dynamic eval() too slow, should make it inlined(precompiled for reused)
+					// FIXME if dynamic eval() too slow, should make it inlined(precompiled for reused)
 					source.trim().startsWith("function") ? "(" + source + ")()" : source,
 					"Script", 1, null);
 			
