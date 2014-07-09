@@ -11,16 +11,25 @@ import org.mozilla.javascript.ScriptableObject;
 public class JavaScriptInvoker implements ScriptInvoker {
 	@Override
 	public Object invoke(String source, Map<String, Object> arguments) {
+		if (source == null)
+			return null;
+		
+		source = source.trim();
+		
+		if (source.equals(""))
+			return "";
+		
 		try {
 			Context ctx = Context.enter();
 			Scriptable scope = ctx.initStandardObjects();
 			
-			for (Entry<String, Object> arg : arguments.entrySet())
-				ScriptableObject.putProperty(scope, arg.getKey(), arg.getValue());
+			if (arguments != null)
+				for (Entry<String, Object> arg : arguments.entrySet())
+					ScriptableObject.putProperty(scope, arg.getKey(), arg.getValue());
 			
 			Object result = ctx.evaluateString(scope,
 					// NOTE if dynamic eval() too slow, should make it inlined(precompiled for reused)
-					source.startsWith("function") ? "(" + source + ")()" : source,
+					source.trim().startsWith("function") ? "(" + source + ")()" : source,
 					"Script", 1, null);
 			
 			if (result == null)

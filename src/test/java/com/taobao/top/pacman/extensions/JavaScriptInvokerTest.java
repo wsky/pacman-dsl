@@ -17,4 +17,10 @@ public class JavaScriptInvokerTest {
 		assertEquals("hi123", new JavaScriptInvoker().invoke("function f(){ return arg1 + arg2 }", arguments));
 		assertEquals("hi123", new JavaScriptInvoker().invoke("arg1 + arg2", arguments));
 	}
+	
+	@Test
+	public void empty_source_test() {
+		assertEquals(null, new JavaScriptInvoker().invoke(null, null));
+		assertEquals("", new JavaScriptInvoker().invoke("", null));
+	}
 }

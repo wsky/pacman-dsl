@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.taobao.top.pacman.WorkflowExtensionManager;
+import com.taobao.top.pacman.extensions.JavaScriptInvoker;
 import com.taobao.top.pacman.extensions.ScriptInvoker;
 import com.taobao.top.pacman.testsuite.DefinitionScriptableTestBase;
 
@@ -37,13 +38,7 @@ public class ScriptDefinitionScriptableTest extends DefinitionScriptableTestBase
 	@Override
 	protected WorkflowExtensionManager createExtensionManager() {
 		WorkflowExtensionManager extensionManager = new WorkflowExtensionManager();
-		extensionManager.addExtension(ScriptInvoker.class, new ScriptInvoker() {
-			@Override
-			public Object invoke(String source, Map<String, Object> arguments) {
-				System.out.println(source);
-				return arguments.get("arg");
-			}
-		});
+		extensionManager.addExtension(ScriptInvoker.class, new JavaScriptInvoker());
 		return extensionManager;
 	}
 }
