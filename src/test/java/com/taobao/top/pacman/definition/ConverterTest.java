@@ -8,8 +8,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.taobao.top.pacman.Activity;
-import com.taobao.top.pacman.WorkflowExtensionManager;
-import com.taobao.top.pacman.WorkflowInstance;
+import com.taobao.top.pacman.WorkflowInvoker;
 
 public class ConverterTest {
 	@Test
@@ -59,29 +58,27 @@ public class ConverterTest {
 						"		End()." +
 						"	End()." +
 						"End()");
-
-		WorkflowExtensionManager extensionManager = new WorkflowExtensionManager();
+		
 		DefinitionValidator validator = new DefinitionValidator();
-
+		
 		Activity activity = layout.toActivity(validator);
-
+		
 		if (validator.hasAnyError()) {
 			System.err.println(validator.getErrors());
 			fail();
 		}
-
+		
 		ActivityTestHelper.testMetadata(activity);
-
+		
 		Map<String, Object> inputs = new HashMap<String, Object>();
 		inputs.put("arg", "test");
 		inputs.put("isThen", false);
 		inputs.put("isWhile", true);
-		Map<String, Object> outputs = WorkflowInstance.invoke(
+		Map<String, Object> outputs = new WorkflowInvoker().invoke(
 				activity,
-				inputs,
-				extensionManager);
+				inputs);
 		System.out.println(outputs);
-
+		
 		if (outputs.get("exception") != null) {
 			((Exception) outputs.get("exception")).printStackTrace();
 			fail();

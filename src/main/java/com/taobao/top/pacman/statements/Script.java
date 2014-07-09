@@ -42,7 +42,7 @@ public class Script extends NativeActivity {
 	}
 	
 	@Override
-	protected void execute(NativeActivityContext context) throws Exception {
+	protected void execute(NativeActivityContext context) {
 		Object result = Asserter.
 				getOrThrowIfExtensionMissing(context, ScriptInvoker.class).
 				invoke((String) this.Source.get(context), this.getArguments(context));

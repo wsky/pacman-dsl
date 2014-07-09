@@ -12,6 +12,8 @@ import com.taobao.top.pacman.WorkflowExtensionManager;
 import com.taobao.top.pacman.WorkflowInstance;
 import com.taobao.top.pacman.definition.ActivityDefinition;
 import com.taobao.top.pacman.definition.DefinitionValidator;
+import com.taobao.top.pacman.extensions.JavaScriptInvoker;
+import com.taobao.top.pacman.extensions.ScriptInvoker;
 
 public abstract class DefinitionTestBase {
 	protected void testMetadata(ActivityDefinition definition) {
@@ -36,7 +38,7 @@ public abstract class DefinitionTestBase {
 	protected Map<String, Object> invoke(
 			ActivityDefinition definition,
 			Map<String, Object> inputs) throws Exception {
-		return this.invoke(definition, inputs, null);
+		return this.invoke(definition, inputs, this.createExtensionManager());
 	}
 	
 	protected Map<String, Object> invoke(
@@ -59,5 +61,11 @@ public abstract class DefinitionTestBase {
 		
 		System.out.println(outputs);
 		return outputs;
+	}
+	
+	protected WorkflowExtensionManager createExtensionManager() {
+		WorkflowExtensionManager extensionManager = new WorkflowExtensionManager();
+		extensionManager.addExtension(ScriptInvoker.class, new JavaScriptInvoker());
+		return extensionManager;
 	}
 }
