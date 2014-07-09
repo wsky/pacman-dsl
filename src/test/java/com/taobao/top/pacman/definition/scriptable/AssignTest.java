@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import com.taobao.top.pacman.testsuite.DefinitionScriptableTestBase;
+
 public class AssignTest extends DefinitionScriptableTestBase {
 	@Override
 	protected String createDefinition() {

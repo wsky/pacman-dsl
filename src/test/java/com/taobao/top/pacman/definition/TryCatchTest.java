@@ -2,6 +2,8 @@ package com.taobao.top.pacman.definition;
 
 import org.junit.Test;
 
+import com.taobao.top.pacman.testsuite.DefinitionTestBase;
+
 public class TryCatchTest extends DefinitionTestBase {
 	@Test
 	public void try_catch_test() {

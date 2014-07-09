@@ -1,4 +1,4 @@
-package com.taobao.top.pacman.definition;
+package com.taobao.top.pacman.testsuite;
 
 import static org.junit.Assert.*;
 

@@ -1,11 +1,10 @@
-package com.taobao.top.pacman.definition.scriptable;
+package com.taobao.top.pacman.testsuite;
 
 import java.util.Map;
 
 import org.junit.Test;
 
 import com.taobao.top.pacman.definition.Converter;
-import com.taobao.top.pacman.definition.DefinitionTestBase;
 
 public abstract class DefinitionScriptableTestBase extends DefinitionTestBase {
 	private Converter converter = new Converter();

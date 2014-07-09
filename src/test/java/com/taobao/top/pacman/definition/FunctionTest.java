@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.taobao.top.pacman.definition.VariableReferenceDefinition;
 import com.taobao.top.pacman.definition.functions.Script;
+import com.taobao.top.pacman.testsuite.DefinitionTestBase;
 
 public class FunctionTest extends DefinitionTestBase {
 	@Test
