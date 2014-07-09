@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import com.taobao.top.pacman.WorkflowExtensionManager;
 import com.taobao.top.pacman.definition.Converter;
 
 public abstract class DefinitionScriptableTestBase extends DefinitionTestBase {
@@ -16,7 +17,7 @@ public abstract class DefinitionScriptableTestBase extends DefinitionTestBase {
 	protected Map<String, Object> invoke(
 			String definition,
 			Map<String, Object> inputs) throws Exception {
-		return this.invoke(this.converter.convert(definition), inputs);
+		return this.invoke(this.converter.convert(definition), inputs, this.createExtensionManager());
 	}
 	
 	@Test
@@ -31,4 +32,8 @@ public abstract class DefinitionScriptableTestBase extends DefinitionTestBase {
 	protected abstract Map<String, Object> createInputs();
 	
 	protected abstract void assertOutputs(Map<String, Object> outputs);
+	
+	protected WorkflowExtensionManager createExtensionManager() {
+		return null;
+	}
 }

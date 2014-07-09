@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.taobao.top.pacman.Variable;
+import com.taobao.top.pacman.VariableValue;
 import com.taobao.top.pacman.statements.Script;
 
 public class ScriptDefinition extends ActivityDefinition {
@@ -33,7 +34,7 @@ public class ScriptDefinition extends ActivityDefinition {
 		return this;
 	}
 	
-	public ScriptDefinition Var(VariableReferenceDefinition variable) {
+	public ScriptDefinition Put(VariableReferenceDefinition variable) {
 		if (this.variables == null)
 			this.variables = new ArrayList<VariableReferenceDefinition>();
 		this.variables.add(variable);
@@ -59,21 +60,26 @@ public class ScriptDefinition extends ActivityDefinition {
 		Script script = new Script();
 		script.Source = this.source.toArgument(this.getParent(), validator);
 		
+		// variable refer to parent's
 		if (this.variables != null)
 			for (VariableReferenceDefinition v : this.variables)
-				script.getVariables().add(v.toVariable(this.getParent(), validator));
+				script.getVariables().add(
+						new Variable(v.getName(),
+								new VariableValue(
+										v.toVariable(this.getParent(), validator))));
 		
-		if (super.variables != null)
+		// variables of itself
+		if (super.variables != null) {
 			for (VariableDefinition variable : super.variables) {
 				Variable var = variable.toVariable();
 				this.addVariable(variable.getName(), var);
 				script.getVariables().add(var);
 			}
+		}
 		
 		if (this.result != null)
 			script.Result = this.result.toArgument(this.getParent(), validator);
 		
 		return script;
 	}
-	
 }

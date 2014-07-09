@@ -17,6 +17,7 @@ import com.taobao.top.pacman.definition.scriptable.If.ThenDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.While.WhileBodyDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.While.WhileDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.assign.AssignDefinitionExtension;
+import com.taobao.top.pacman.definition.scriptable.script.ScriptDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.sequence.SequenceDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.tryCatch.CatchDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.tryCatch.FinallyDefinitionExtension;
@@ -26,10 +27,10 @@ import com.taobao.top.pacman.definition.scriptable.writeLine.WriteLineDefinition
 
 public class Converter {
 	private final static String SOURCE_NAME = "DSL";
-
+	
 	private ScriptableObject publicScope;
 	private String root = "Workflow";
-
+	
 	public Converter() {
 		try {
 			Context ctx = Context.enter();
@@ -39,39 +40,39 @@ public class Converter {
 			Context.exit();
 		}
 	}
-
+	
 	public void setRootObjectName(String value) {
 		this.root = value;
 	}
-
+	
 	public WorkflowDefinition convert(String definition) {
 		try {
 			Context ctx = Context.enter();
 			// more about scope
 			// https://developer.mozilla.org/en-US/docs/Rhino/Scopes_and_Contexts
 			Scriptable scope = ctx.newObject(this.publicScope);
-
+			
 			String source = String.format(
 					"var %s = new %s();\n%s",
 					this.root,
 					WorkflowDefinitionAdapter.class.getSimpleName(),
 					definition);
 			ctx.evaluateString(scope, source, SOURCE_NAME, 1, null);
-
+			
 			return ((WorkflowDefinitionAdapter) ScriptableObject.getProperty(scope, this.root)).getDefinition();
 		} finally {
 			Context.exit();
 		}
 	}
-
+	
 	public void addDefinitionExtension(DefinitionExtension extension) {
 		this.addDefinitionExtension(this.publicScope, extension);
 	}
-
+	
 	public void addFunctionExtension(FunctionExtension extension) {
 		this.addFunctionExtension(this.publicScope, extension);
 	}
-
+	
 	private void addDefinitionExtension(Scriptable scope, DefinitionExtension extension) {
 		try {
 			Context ctx = Context.enter();
@@ -94,42 +95,45 @@ public class Converter {
 			Context.exit();
 		}
 	}
-
+	
 	private void addFunctionExtension(Scriptable scope, FunctionExtension extension) {
 		List<FunctionObject> functions = extension.getFunctions(scope);
 		if (functions != null)
 			for (FunctionObject func : functions)
 				ScriptableObject.putProperty(scope, func.getFunctionName(), func);
 	}
-
+	
 	private void prepareScope(Scriptable scope, Context ctx) {
 		try {
 			ScriptableObject.defineClass(scope, WorkflowDefinitionAdapter.class);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-
+		
 		// default extensions
-
+		
 		this.addFunctionExtension(new Functions());
-
+		
 		this.addDefinitionExtension(new SequenceDefinitionExtension());
 		this.addDefinitionExtension(new WriteLineDefinitionExtension());
 		this.addDefinitionExtension(new AssignDefinitionExtension());
-
+		
 		// while
 		this.addDefinitionExtension(new WhileDefinitionExtension());
 		this.addDefinitionExtension(new WhileBodyDefinitionExtension());
-
+		
 		// if
 		this.addDefinitionExtension(new IfDefinitionExtension());
 		this.addDefinitionExtension(new ThenDefinitionExtension());
 		this.addDefinitionExtension(new ElseDefinitionExtension());
-
+		
 		// try-catch
 		this.addDefinitionExtension(new TryCatchDefinitionExtension());
 		this.addDefinitionExtension(new TryDefinitionExtension());
 		this.addDefinitionExtension(new CatchDefinitionExtension());
 		this.addDefinitionExtension(new FinallyDefinitionExtension());
+		
+		// Script
+		this.addDefinitionExtension(new ScriptDefinitionExtension());
 	}
 }
