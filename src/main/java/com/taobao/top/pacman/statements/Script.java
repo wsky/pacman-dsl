@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.taobao.top.pacman.ActivityContext;
 import com.taobao.top.pacman.ActivityMetadata;
+import com.taobao.top.pacman.Asserter;
 import com.taobao.top.pacman.InArgument;
 import com.taobao.top.pacman.NativeActivity;
 import com.taobao.top.pacman.NativeActivityContext;
@@ -42,9 +43,9 @@ public class Script extends NativeActivity {
 	
 	@Override
 	protected void execute(NativeActivityContext context) throws Exception {
-		Object result = context.getExtension(ScriptInvoker.class).invoke(
-				(String) this.Source.get(context),
-				this.getArguments(context));
+		Object result = Asserter.
+				getOrThrowIfExtensionMissing(context, ScriptInvoker.class).
+				invoke((String) this.Source.get(context), this.getArguments(context));
 		
 		if (this.Result != null)
 			this.Result.set(context, result);
