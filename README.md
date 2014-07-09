@@ -4,6 +4,9 @@ pacman-dsl
 Extensible DSL for [pacman](https://github.com/wsky/pacman) workflow.
 
 ```js
+function func(){
+    return arg1;
+}
 var wf = Workflow.
     In('arg1').
     In('arg2').
@@ -11,16 +14,17 @@ var wf = Workflow.
     Out('result').
     Var('temp').
     Sequence().
-        Assign().From(Var('arg1')).To(Var('temp')).End().
+        Assign().Value(Var('arg1')).To(Var('temp')).End().
         If().Condition(Var('temp')).
             Then().
-                Assign().Value(Var('arg1')).To(Var('Result')).End().
+                Assign().Value(Script(func, [Var('arg1')]).To(Var('Result')).End().
             End().
             Else().
                 Assign().Value(Var('arg2')).To(Var('Result')).End().
             End().
         End().
         WriteLine().Text(Var('result')).End().
+        Scripting().Source(func).Put(Var('arg1')).End().
     End().
 End();
 ```
@@ -46,7 +50,7 @@ Map<String, Object> outputs = new WorkflowInvoker().invoke(wf, inouts);
 assertEquals("hello", outputs.get("result"));
 
 // or
-Activity workflow = new DefaultLayoutInvoker().convert(wf);
+Activity workflow = new WorkflowInvoker().convert(wf);
 Map<String, Object> outputs = new WorkflowInvoker().invoke(workflow, inputs);
 assertEquals("hello", outputs.get("result"));
 ```
