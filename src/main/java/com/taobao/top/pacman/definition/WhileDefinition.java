@@ -19,10 +19,6 @@ public class WhileDefinition extends ActivityDefinition {
 		return this.Condition(new VariableValueDefinition().Variable(variable));
 	}
 	
-	public WhileDefinition Condition(InlinedFunctionDefinition function) {
-		return this.Condition((ActivityWithResultDefinition) function);
-	}
-	
 	public WhileDefinition Condition(ActivityWithResultDefinition condition) {
 		this.condition = condition;
 		return this;

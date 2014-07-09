@@ -15,6 +15,7 @@ import com.taobao.top.pacman.definition.InlinedFunctionDefinition;
 import com.taobao.top.pacman.definition.VariableReferenceDefinition;
 import com.taobao.top.pacman.extensions.ScriptInvoker;
 
+// FIXME use Script activity instead
 public class Script extends InlinedFunctionDefinition {
 	private String source;
 	private VariableReferenceDefinition[] variables;

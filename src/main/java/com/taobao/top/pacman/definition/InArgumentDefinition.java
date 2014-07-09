@@ -18,8 +18,8 @@ public class InArgumentDefinition {
 		this.variable = variable;
 	}
 	
-	public InArgumentDefinition(ActivityWithResultDefinition activityWithResult) {
-		this.activityWithResult = activityWithResult;
+	public InArgumentDefinition(ActivityWithResultDefinition expression) {
+		this.activityWithResult = expression;
 	}
 	
 	public InArgument toArgument(ActivityDefinition parent, DefinitionValidator validator) {
