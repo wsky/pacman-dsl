@@ -13,7 +13,6 @@ import org.junit.Test;
 import com.taobao.top.pacman.Activity;
 import com.taobao.top.pacman.ActivityContext;
 import com.taobao.top.pacman.Function;
-import com.taobao.top.pacman.InlinedFunctionValue;
 import com.taobao.top.pacman.WorkflowInstance;
 
 public class WorkflowDefinitionTest {
@@ -40,15 +39,15 @@ public class WorkflowDefinitionTest {
 								new WhileDefinition().
 										Condition(new InlinedFunctionDefinition() {
 											@Override
-											public InlinedFunctionValue toFunction(ActivityDefinition parent, DefinitionValidator validator) {
-												return new InlinedFunctionValue(new Function<ActivityContext, Object>() {
+											public Function<ActivityContext, Object> getFunction(ActivityDefinition parent, DefinitionValidator validator) {
+												return new Function<ActivityContext, Object>() {
 													private boolean b = false;
-
+													
 													@Override
 													public Object execute(ActivityContext context) {
 														return b = !b;
 													}
-												});
+												};
 											}
 										}).
 										Body(new WriteLineDefinition().Text("while"))
@@ -68,7 +67,7 @@ public class WorkflowDefinitionTest {
 		System.out.println(outputs);
 		assertEquals("hello", outputs.get("result"));
 	}
-
+	
 	@Test
 	public void validate_test() throws Exception {
 		DefinitionValidator validator = new DefinitionValidator();

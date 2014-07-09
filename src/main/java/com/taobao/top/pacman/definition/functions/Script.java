@@ -8,7 +8,6 @@ import java.util.Map;
 import com.taobao.top.pacman.ActivityContext;
 import com.taobao.top.pacman.Asserter;
 import com.taobao.top.pacman.Function;
-import com.taobao.top.pacman.InlinedFunctionValue;
 import com.taobao.top.pacman.Variable;
 import com.taobao.top.pacman.definition.ActivityDefinition;
 import com.taobao.top.pacman.definition.DefinitionValidator;
@@ -26,7 +25,7 @@ public class Script extends InlinedFunctionDefinition {
 	}
 	
 	@Override
-	public InlinedFunctionValue toFunction(ActivityDefinition parent, DefinitionValidator validator) {
+	public Function<ActivityContext, Object> getFunction(ActivityDefinition parent, DefinitionValidator validator) {
 		if (this.source == null)
 			validator.addError("source not set");
 		
@@ -37,7 +36,7 @@ public class Script extends InlinedFunctionDefinition {
 				variables.add(definition.toVariable(parent, validator));
 		}
 		
-		return new InlinedFunctionValue(new ScriptFunction(this.source, variables));
+		return new ScriptFunction(this.source, variables);
 	}
 	
 	class ScriptFunction implements Function<ActivityContext, Object> {
