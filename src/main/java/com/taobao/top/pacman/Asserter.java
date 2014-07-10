@@ -7,4 +7,8 @@ public class Asserter {
 			throw new PacmanException(String.format("extension \"%s\" can not be null", type.getName()));
 		return e;
 	}
+	
+	public static PacmanException shouldNotReachHere() {
+		return new PacmanException("should not reach here");
+	}
 }

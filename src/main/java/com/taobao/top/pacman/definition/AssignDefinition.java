@@ -20,13 +20,9 @@ public class AssignDefinition extends ActivityDefinition {
 		return this;
 	}
 	
-	public AssignDefinition To(OutArgumentDefinition to) {
-		this.to = to;
+	public AssignDefinition To(Object to) {
+		this.to = DefinitionUtilities.parseOutArgument(to);
 		return this;
-	}
-	
-	public AssignDefinition To(VariableReferenceDefinition variable) {
-		return this.To(new OutArgumentDefinition(variable));
 	}
 	
 	@Override
