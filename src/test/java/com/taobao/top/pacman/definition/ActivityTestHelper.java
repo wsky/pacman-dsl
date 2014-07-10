@@ -6,7 +6,7 @@ import com.taobao.top.pacman.ActivityUtilities;
 import com.taobao.top.pacman.RenderProcessActivityCallback;
 
 public class ActivityTestHelper {
-	public static void testMetadata(Activity activity) {
+	public static void testMetadata(Activity activity) throws Exception {
 		ActivityLocationReferenceEnvironment hostEnvironment = new ActivityLocationReferenceEnvironment(null);
 		ActivityUtilities.cacheRootMetadata(activity, hostEnvironment, new RenderProcessActivityCallback());
 	}

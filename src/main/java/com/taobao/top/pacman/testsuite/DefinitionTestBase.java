@@ -7,6 +7,7 @@ import java.util.Map;
 import com.taobao.top.pacman.Activity;
 import com.taobao.top.pacman.ActivityLocationReferenceEnvironment;
 import com.taobao.top.pacman.ActivityUtilities;
+import com.taobao.top.pacman.PacmanException;
 import com.taobao.top.pacman.RenderProcessActivityCallback;
 import com.taobao.top.pacman.WorkflowExtensionManager;
 import com.taobao.top.pacman.WorkflowInstance;
@@ -32,7 +33,11 @@ public abstract class DefinitionTestBase {
 		if (hasAnyError)
 			return;
 		ActivityLocationReferenceEnvironment hostEnvironment = new ActivityLocationReferenceEnvironment(null);
-		ActivityUtilities.cacheRootMetadata(activity, hostEnvironment, new RenderProcessActivityCallback());
+		try {
+			ActivityUtilities.cacheRootMetadata(activity, hostEnvironment, new RenderProcessActivityCallback());
+		} catch (Exception e) {
+			throw new PacmanException(e);
+		}
 	}
 	
 	protected Map<String, Object> invoke(
