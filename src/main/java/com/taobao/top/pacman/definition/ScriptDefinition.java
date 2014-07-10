@@ -11,7 +11,6 @@ import com.taobao.top.pacman.statements.Script;
 public class ScriptDefinition extends ActivityWithResultDefinition {
 	private InArgumentDefinition source;
 	private List<VariableReferenceDefinition> variables;
-	private OutArgumentDefinition result;
 	
 	public ScriptDefinition() {
 		this("Script");
@@ -42,15 +41,6 @@ public class ScriptDefinition extends ActivityWithResultDefinition {
 		return this;
 	}
 	
-	public ScriptDefinition Result(VariableReferenceDefinition variable) {
-		return this.Result(new OutArgumentDefinition(variable));
-	}
-	
-	public ScriptDefinition Result(OutArgumentDefinition result) {
-		this.result = result;
-		return this;
-	}
-	
 	@Override
 	public ActivityWithResult internalToActivityWithResult(ActivityDefinition parent, DefinitionValidator validator) {
 		if (this.source == null)
@@ -77,9 +67,6 @@ public class ScriptDefinition extends ActivityWithResultDefinition {
 				script.getVariables().add(var);
 			}
 		}
-		
-		if (this.result != null)
-			script.setResult(this.result.toArgument(parent, validator));
 		
 		return script;
 	}
