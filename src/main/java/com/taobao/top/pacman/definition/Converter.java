@@ -17,6 +17,8 @@ import com.taobao.top.pacman.definition.scriptable.If.ThenDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.While.WhileBodyDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.While.WhileDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.assign.AssignDefinitionExtension;
+import com.taobao.top.pacman.definition.scriptable.newList.NewListDefinitionExtension;
+import com.taobao.top.pacman.definition.scriptable.newMap.NewMapDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.script.ScriptDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.sequence.SequenceDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.tryCatch.CatchDefinitionExtension;
@@ -140,5 +142,9 @@ public class Converter {
 		
 		// Script
 		this.addDefinitionExtension(new ScriptDefinitionExtension());
+		
+		// Map/List
+		this.addDefinitionExtension(new NewListDefinitionExtension());
+		this.addDefinitionExtension(new NewMapDefinitionExtension());
 	}
 }
