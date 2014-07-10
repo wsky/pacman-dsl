@@ -1,7 +1,6 @@
 package com.taobao.top.pacman.definition;
 
 import com.taobao.top.pacman.Activity;
-import com.taobao.top.pacman.definition.scriptable.DefinitionAdapter;
 import com.taobao.top.pacman.statements.Assign;
 
 public class AssignDefinition extends ActivityDefinition {
@@ -16,24 +15,8 @@ public class AssignDefinition extends ActivityDefinition {
 		super(displayName);
 	}
 	
-	public AssignDefinition Value(Object constValue) {
-		return this.Value(new InArgumentDefinition(constValue));
-	}
-	
-	public AssignDefinition Value(VariableReferenceDefinition variable) {
-		return this.Value(new InArgumentDefinition(variable));
-	}
-	
-	public AssignDefinition Value(DefinitionAdapter<?> adapter) {
-		return this.Value((ActivityWithResultDefinition) adapter.getDefinition());
-	}
-	
-	public AssignDefinition Value(ActivityWithResultDefinition activityWithResult) {
-		return this.Value(new InArgumentDefinition(activityWithResult));
-	}
-	
-	public AssignDefinition Value(InArgumentDefinition value) {
-		this.value = value;
+	public AssignDefinition Value(Object value) {
+		this.value = DefinitionUtilities.parseInArgument(value);
 		return this;
 	}
 	
