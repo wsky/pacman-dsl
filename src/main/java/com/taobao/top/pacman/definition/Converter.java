@@ -19,6 +19,7 @@ import com.taobao.top.pacman.definition.scriptable.While.WhileDefinitionExtensio
 import com.taobao.top.pacman.definition.scriptable.addTo.AddToDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.assign.AssignDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.existsIn.ExistsInDefinitionExtension;
+import com.taobao.top.pacman.definition.scriptable.getFrom.GetFromDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.newList.NewListDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.newMap.NewMapDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.removeFrom.RemoveFromDefinitionExtension;
@@ -152,5 +153,6 @@ public class Converter {
 		this.addDefinitionExtension(new AddToDefinitionExtension());
 		this.addDefinitionExtension(new RemoveFromDefinitionExtension());
 		this.addDefinitionExtension(new ExistsInDefinitionExtension());
+		this.addDefinitionExtension(new GetFromDefinitionExtension());
 	}
 }

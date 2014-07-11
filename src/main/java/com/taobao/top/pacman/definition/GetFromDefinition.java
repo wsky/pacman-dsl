@@ -52,8 +52,8 @@ public class GetFromDefinition extends ActivityWithResultDefinition {
 		
 		if (this.isMap) {
 			GetFromMap map = new GetFromMap();
-			map.Map = this.to.toArgument(this.getParent(), validator);
-			map.Key = this.key.toArgument(this.getParent(), validator);
+			map.Map = this.to.toArgument(parent, validator);
+			map.Key = this.key.toArgument(parent, validator);
 			return map;
 		}
 		
