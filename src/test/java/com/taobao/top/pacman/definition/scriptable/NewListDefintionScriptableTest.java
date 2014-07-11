@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.taobao.top.pacman.testsuite.DefinitionScriptableTestBase;
 
-public class ListDefintionScriptableTest extends DefinitionScriptableTestBase {
+public class NewListDefintionScriptableTest extends DefinitionScriptableTestBase {
 	@Override
 	protected String createDefinition() {
 		return "Workflow."
