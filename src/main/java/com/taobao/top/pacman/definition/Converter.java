@@ -16,9 +16,12 @@ import com.taobao.top.pacman.definition.scriptable.If.IfDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.If.ThenDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.While.WhileBodyDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.While.WhileDefinitionExtension;
+import com.taobao.top.pacman.definition.scriptable.addTo.AddToDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.assign.AssignDefinitionExtension;
+import com.taobao.top.pacman.definition.scriptable.existsIn.ExistsInDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.newList.NewListDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.newMap.NewMapDefinitionExtension;
+import com.taobao.top.pacman.definition.scriptable.removeFrom.RemoveFromDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.script.ScriptDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.sequence.SequenceDefinitionExtension;
 import com.taobao.top.pacman.definition.scriptable.tryCatch.CatchDefinitionExtension;
@@ -146,5 +149,8 @@ public class Converter {
 		// Map/List
 		this.addDefinitionExtension(new NewListDefinitionExtension());
 		this.addDefinitionExtension(new NewMapDefinitionExtension());
+		this.addDefinitionExtension(new AddToDefinitionExtension());
+		this.addDefinitionExtension(new RemoveFromDefinitionExtension());
+		this.addDefinitionExtension(new ExistsInDefinitionExtension());
 	}
 }
