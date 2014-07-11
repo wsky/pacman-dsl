@@ -29,6 +29,24 @@ var wf = Workflow.
 End();
 ```
 
+## Definitions
+
+- Workflow
+    - In/Out/Var
+    - Var/Script
+- If/Else
+- While
+- Sequence
+- TryCatch
+- WriteLine
+- Assign
+- Scripting
+- NewList
+- NewMap
+- AddTo
+- RemoveFrom
+- ExistsIn
+
 ## How to
 
 ```xml
