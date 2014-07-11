@@ -52,14 +52,14 @@ public class ExistsInDefinition extends ActivityWithResultDefinition {
 		
 		if (this.isMap) {
 			ExistsInMap map = new ExistsInMap();
-			map.Map = this.to.toArgument(this.getParent(), validator);
-			map.Key = this.key.toArgument(this.getParent(), validator);
+			map.Map = this.to.toArgument(parent, validator);
+			map.Key = this.key.toArgument(parent, validator);
 			return map;
 		}
 		
 		ExistsInCollection collection = new ExistsInCollection();
-		collection.Collection = this.to.toArgument(this.getParent(), validator);
-		collection.Item = this.item.toArgument(this.getParent(), validator);
+		collection.Collection = this.to.toArgument(parent, validator);
+		collection.Item = this.item.toArgument(parent, validator);
 		return collection;
 	}
 	

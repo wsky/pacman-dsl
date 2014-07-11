@@ -52,14 +52,14 @@ public class RemoveFromDefinition extends ActivityWithResultDefinition {
 		
 		if (this.isMap) {
 			RemoveFromMap map = new RemoveFromMap();
-			map.Map = this.to.toArgument(this.getParent(), validator);
-			map.Key = this.key.toArgument(this.getParent(), validator);
+			map.Map = this.to.toArgument(parent, validator);
+			map.Key = this.key.toArgument(parent, validator);
 			return map;
 		}
 		
 		RemoveFromCollection collection = new RemoveFromCollection();
-		collection.Collection = this.to.toArgument(this.getParent(), validator);
-		collection.Item = this.item.toArgument(this.getParent(), validator);
+		collection.Collection = this.to.toArgument(parent, validator);
+		collection.Item = this.item.toArgument(parent, validator);
 		return collection;
 	}
 	

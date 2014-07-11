@@ -14,10 +14,11 @@ public class RemoveFromDefinitionScriptableTest extends DefinitionScriptableTest
 	protected String createDefinition() {
 		return "Workflow."
 				+ "In('map').In('list')."
-				+ "Out('result1').Out('result2')."
+				+ "Out('result1').Out('result2').Out('result3')."
 				+ "Sequence()."
 				+ "    RemoveFrom().Map(Var('map')).Key('key').Result(Var('result1')).End()."
 				+ "    RemoveFrom().List(Var('list')).Item('item').Result(Var('result2')).End()."
+				+ "    Assign().Value(RemoveFrom().List(Var('list')).Item('item')).To(Var('result3')).End()."
 				+ "End()";
 	}
 	
@@ -40,6 +41,6 @@ public class RemoveFromDefinitionScriptableTest extends DefinitionScriptableTest
 	protected void assertOutputs(Map<String, Object> outputs) {
 		assertEquals("value", outputs.get("result1"));
 		assertEquals(true, outputs.get("result2"));
+		assertEquals(false, outputs.get("result3"));
 	}
-	
 }
