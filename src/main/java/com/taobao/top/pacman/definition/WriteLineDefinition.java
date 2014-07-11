@@ -1,7 +1,6 @@
 package com.taobao.top.pacman.definition;
 
 import com.taobao.top.pacman.Activity;
-import com.taobao.top.pacman.definition.scriptable.DefinitionAdapter;
 import com.taobao.top.pacman.statements.WriteLine;
 
 public class WriteLineDefinition extends ActivityDefinition {
@@ -19,16 +18,8 @@ public class WriteLineDefinition extends ActivityDefinition {
 		super(displayName, parent);
 	}
 	
-	public WriteLineDefinition Text(Object constValue) {
-		return this.Text(new InArgumentDefinition(constValue));
-	}
-	
-	public WriteLineDefinition Text(DefinitionAdapter<?> adapter) {
-		return this.Text((ActivityWithResultDefinition) adapter.getDefinition());
-	}
-	
-	public WriteLineDefinition Text(ActivityWithResultDefinition expression) {
-		return this.Text(new InArgumentDefinition(expression));
+	public WriteLineDefinition Text(Object input) {
+		return this.Text(DefinitionUtilities.parseInArgument(input));
 	}
 	
 	public WriteLineDefinition Text(InArgumentDefinition text) {

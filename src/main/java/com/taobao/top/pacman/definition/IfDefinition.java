@@ -1,7 +1,6 @@
 package com.taobao.top.pacman.definition;
 
 import com.taobao.top.pacman.Activity;
-import com.taobao.top.pacman.definition.scriptable.DefinitionAdapter;
 import com.taobao.top.pacman.statements.If;
 
 public class IfDefinition extends ActivityDefinition {
@@ -21,20 +20,8 @@ public class IfDefinition extends ActivityDefinition {
 		return this.Condition(new InArgumentDefinition(true));
 	}
 	
-	public IfDefinition Condition(VariableReferenceDefinition variable) {
-		return this.Condition(new InArgumentDefinition(variable));
-	}
-	
-	public IfDefinition Condition(DefinitionAdapter<?> adapter) {
-		return this.Condition((ActivityWithResultDefinition) adapter.getDefinition());
-	}
-	
-	public IfDefinition Condition(ActivityWithResultDefinition expression) {
-		return this.Condition(new InArgumentDefinition(expression));
-	}
-	
-	public IfDefinition Condition(InArgumentDefinition condition) {
-		this.condition = condition;
+	public IfDefinition Condition(Object input) {
+		this.condition = DefinitionUtilities.parseInArgument(input);
 		return this;
 	}
 	

@@ -35,4 +35,15 @@ public class DefinitionUtilities {
 		
 		throw Asserter.shouldNotReachHere();
 	}
+	
+	public static ActivityWithResultDefinition parseActivityWithResult(Object input) {
+		if (input instanceof ActivityWithResultDefinition)
+			return (ActivityWithResultDefinition) input;
+		if (input instanceof DefinitionAdapter<?>)
+			return (ActivityWithResultDefinition) ((DefinitionAdapter<?>) input).getDefinition();
+		if (input instanceof VariableReferenceDefinition)
+			return new VariableValueDefinition().Variable((VariableReferenceDefinition) input);
+		
+		throw Asserter.shouldNotReachHere();
+	}
 }
