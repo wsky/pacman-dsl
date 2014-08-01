@@ -4,6 +4,7 @@ import com.taobao.top.pacman.definition.ActivityDefinition;
 import com.taobao.top.pacman.definition.ExistsInDefinition;
 import com.taobao.top.pacman.definition.scriptable.DefinitionAdapter;
 import com.taobao.top.pacman.definition.scriptable.DefinitionExtension;
+import com.taobao.top.pacman.definition.scriptable.ScriptableUtil;
 
 public class ExistsInDefinitionExtension implements DefinitionExtension {
 	public String getName() {
@@ -19,7 +20,9 @@ public class ExistsInDefinitionExtension implements DefinitionExtension {
 	}
 	
 	public ActivityDefinition create(Object... args) {
-		return args == null ? new ExistsInDefinition() : new ExistsInDefinition((String) args[0]);
+		return ScriptableUtil.canGetDisplayNameFromCreateArgs(args) ?
+				new ExistsInDefinition((String) args[0]) :
+				new ExistsInDefinition();
 	}
 	
 }

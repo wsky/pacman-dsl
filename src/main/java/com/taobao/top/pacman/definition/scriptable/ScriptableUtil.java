@@ -9,4 +9,8 @@ public class ScriptableUtil {
 				((DefinitionAdapter<?>)
 				((NativeJavaObject) activity).unwrap()).getExtensionName()));
 	}
+	
+	public static boolean canGetDisplayNameFromCreateArgs(Object... args) {
+		return args != null && args.length > 0 && !"undefined".equals(args[0]);
+	}
 }
