@@ -51,7 +51,7 @@ End();
 
 ```xml
 <dependency>
-    <groupId>com.taobao.top</groupId>
+    <groupId>pacman</groupId>
     <artifactId>pacman-dsl</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
