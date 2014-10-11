@@ -25,4 +25,18 @@ public class JavaScriptInvokerTest {
 		assertEquals(null, new JavaScriptInvoker().invoke(null, null));
 		assertEquals("", new JavaScriptInvoker().invoke("", null));
 	}
+	
+	@Test
+	public void compiled_test() {
+		JavaScriptInvoker invoker = new JavaScriptInvoker();
+		
+		Map<String, Object> arguments = new HashMap<String, Object>();
+		arguments.put("arg1", "hi");
+		arguments.put("arg2", 123);
+		
+		long begin = System.currentTimeMillis();
+		for (int i = 0; i < 10000; i++)
+			invoker.invoke("function(){ return arg1 + arg2 }", arguments);
+		System.out.println(System.currentTimeMillis() - begin);
+	}
 }
